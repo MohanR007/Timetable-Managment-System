@@ -6,27 +6,104 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='image.png') }}">
     <title>Create Teacher</title>
     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    <style>
+      body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+      }
+      .card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      }
+      .form-control, .form-select {
+        border-radius: 10px;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+      .form-control:focus, .form-select:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 0.25rem rgba(74, 144, 226, 0.25);
+      }
+      .btn-primary {
+        padding: 12px 30px;
+        border-radius: 30px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        background: linear-gradient(45deg, #4a90e2, #67b26f);
+        border: none;
+        transition: all 0.3s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 7px 14px rgba(74, 144, 226, 0.2);
+      }
+      .display-5 {
+        background: linear-gradient(45deg, #4a90e2, #67b26f);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+      }
+      .lead {
+        color: #6c757d;
+        font-size: 1.1rem;
+      }
+      .form-label {
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 0.5rem;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .container {
+        animation: fadeIn 0.6s ease-out;
+      }
+      .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .form-control, .form-select {
+        background: rgba(255, 255, 255, 0.9);
+      }
+      .input-focused {
+        transform: translateY(-5px);
+      }
+      .input-focused label {
+        color: #4a90e2;
+      }
+    </style>
   </head>
-  <body class="bg-light">
+  <body>
     <div class="container py-5">
       <div class="text-center mb-5">
-        <h1 class="display-5 text-primary fw-bold">Create Teacher</h1>
-        <p class="lead text-secondary">
-          Add a new teacher by providing the required details and assigning a
-          job role.
+        <h1 class="display-5 fw-bold gradient-text">Create Teacher</h1>
+        <p class="lead">
+          Add a new teacher by providing the required details and assigning a job role
         </p>
       </div>
       <div class="row justify-content-center">
         <div class="col-md-8">
-          <div class="card shadow">
-            <div class="card-body">
-              <form action="/create-teacher" method="POST">
-                <div class="mb-3">
-                  <label for="name" class="form-label">Name</label>
+          <div class="card shadow-lg">
+            <div class="card-body p-5">
+              <form action="/create-teacher" method="POST" class="needs-validation" novalidate>
+                <div class="mb-4 form-group">
+                  <label for="name" class="form-label">
+                    <i class="fas fa-user me-2 gradient-text"></i>Name
+                  </label>
                   <input
                     type="text"
                     id="name"
@@ -36,8 +113,10 @@
                     required
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="extra_role" class="form-label">Extra Role</label>
+                <div class="mb-4 form-group">
+                  <label for="extra_role" class="form-label">
+                    <i class="fas fa-star me-2 gradient-text"></i>Extra Role
+                  </label>
                   <input
                     type="text"
                     id="extra_role"
@@ -46,20 +125,20 @@
                     placeholder="Enter any additional role"
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="job_role" class="form-label">Job Role</label>
+                <div class="mb-4 form-group">
+                  <label for="job_role" class="form-label">
+                    <i class="fas fa-briefcase me-2 gradient-text"></i>Job Role
+                  </label>
                   <select id="job_role" name="job_role" class="form-select">
                     <option value="Professor">Professor</option>
-                    <option value="Assistant Professor">
-                      Assistant Professor
-                    </option>
+                    <option value="Assistant Professor">Assistant Professor</option>
                     <option value="HOD">HOD</option>
                   </select>
                 </div>
-                <div class="mb-3">
-                  <label for="department_id" class="form-label"
-                    >Department ID</label
-                  >
+                <div class="mb-4 form-group">
+                  <label for="department_id" class="form-label">
+                    <i class="fas fa-building me-2 gradient-text"></i>Department ID
+                  </label>
                   <input
                     type="number"
                     id="department_id"
@@ -69,10 +148,10 @@
                     required
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="working_hours" class="form-label"
-                    >Working Hours</label
-                  >
+                <div class="mb-4 form-group">
+                  <label for="working_hours" class="form-label">
+                    <i class="fas fa-clock me-2 gradient-text"></i>Working Hours
+                  </label>
                   <input
                     type="number"
                     id="working_hours"
@@ -82,10 +161,10 @@
                     required
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="employee_id" class="form-label"
-                    >Employee ID</label
-                  >
+                <div class="mb-4 form-group">
+                  <label for="employee_id" class="form-label">
+                    <i class="fas fa-id-card me-2 gradient-text"></i>Employee ID
+                  </label>
                   <input
                     type="number"
                     id="employee_id"
@@ -95,9 +174,9 @@
                     required
                   />
                 </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary btn-lg">
-                    Create Teacher
+                <div class="text-center mt-5">
+                  <button type="submit" class="btn btn-primary btn-lg px-5">
+                    <i class="fas fa-plus-circle me-2"></i>Create Teacher
                   </button>
                 </div>
               </form>
@@ -108,5 +187,7 @@
     </div>
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
   </body>
 </html>
