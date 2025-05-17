@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Teachers</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="text-center mb-5">
+        <h1 class="display-5 text-primary fw-bold">All Teachers</h1>
+        <p class="lead text-secondary">
+          View all teachers and their assigned details.
+        </p>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <div class="card shadow">
+            <div class="card-body">
+              <table class="table table-striped table-bordered">
+                <thead class="table-primary">
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Extra Role</th>
+                    <th>Job Role</th>
+                    <th>Department ID</th>
+                    <th>Working Hours</th>
+                    <th>Employee ID</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for teacher in teachers %}
+                  <tr>
+                    <td>{{ teacher[0] }}</td>
+                    <td>{{ teacher[1] }}</td>
+                    <td>{{ teacher[2] }}</td>
+                    <td>{{ teacher[3] }}</td>
+                    <td>{{ teacher[4] }}</td>
+                    <td>{{ teacher[5] }}</td>
+                    <td>{{ teacher[6] }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              <div class="text-center">
+                <a href="/" class="btn btn-secondary btn-lg mt-3">
+                  Back to Homepage
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
