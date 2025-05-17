@@ -30,6 +30,27 @@ def create_teacher():
         return redirect(url_for("view_teachers"))
     return render_template("create_teacher.html")
 
+# Function to edit a teacher
+@app.route("/edit-teacher/<int:teacher_id>", methods=["POST"])
+def edit_teacher(teacher_id):
+    if request.method == "POST":
+        data = request.form
+        query = """
+        UPDATE teachers 
+        SET name = ?, extra_role = ?, job_role = ?, department_id = ?, working_hours = ?, employee_id = ?
+        WHERE id = ?
+        """
+        execute_query(query, (data["name"], data["extra_role"], data["job_role"], data["department_id"], data["working_hours"], data["employee_id"], teacher_id))
+        return redirect(url_for("view_teachers"))
+
+# Function to delete a teacher
+@app.route("/delete-teacher/<int:teacher_id>", methods=["POST"])
+def delete_teacher(teacher_id):
+    if request.method == "POST":
+        query = "DELETE FROM teachers WHERE id = ?"
+        execute_query(query, (teacher_id,))
+        return redirect(url_for("view_teachers"))
+
 # Function to create a new course
 @app.route("/create-course", methods=["GET", "POST"])
 def create_course():
@@ -43,6 +64,27 @@ def create_course():
         return redirect(url_for("view_courses"))
     return render_template("create_course.html")
 
+# Function to edit a course
+@app.route("/edit-course/<int:course_id>", methods=["POST"])
+def edit_course(course_id):
+    if request.method == "POST":
+        data = request.form
+        query = """
+        UPDATE courses 
+        SET name = ?, credits = ?, classes_per_week = ?, teacher_id = ?
+        WHERE id = ?
+        """
+        execute_query(query, (data["name"], data["credits"], data["classes_per_week"], data["teacher_id"], course_id))
+        return redirect(url_for("view_courses"))
+
+# Function to delete a course
+@app.route("/delete-course/<int:course_id>", methods=["POST"])
+def delete_course(course_id):
+    if request.method == "POST":
+        query = "DELETE FROM courses WHERE id = ?"
+        execute_query(query, (course_id,))
+        return redirect(url_for("view_courses"))
+
 # Function to create a new classroom
 @app.route("/create-classroom", methods=["GET", "POST"])
 def create_classroom():
@@ -55,6 +97,27 @@ def create_classroom():
         execute_query(query, (data["number"], data["capacity"]))
         return redirect(url_for("view_classrooms"))
     return render_template("create_classroom.html")
+
+# Function to edit a classroom
+@app.route("/edit-classroom/<int:classroom_id>", methods=["POST"])
+def edit_classroom(classroom_id):
+    if request.method == "POST":
+        data = request.form
+        query = """
+        UPDATE classrooms 
+        SET number = ?, capacity = ?
+        WHERE id = ?
+        """
+        execute_query(query, (data["number"], data["capacity"], classroom_id))
+        return redirect(url_for("view_classrooms"))
+
+# Function to delete a classroom
+@app.route("/delete-classroom/<int:classroom_id>", methods=["POST"])
+def delete_classroom(classroom_id):
+    if request.method == "POST":
+        query = "DELETE FROM classrooms WHERE id = ?"
+        execute_query(query, (classroom_id,))
+        return redirect(url_for("view_classrooms"))
 
 # Function to view all classrooms
 @app.route("/classrooms", methods=["GET"])
